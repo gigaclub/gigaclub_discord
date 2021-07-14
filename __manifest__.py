@@ -7,7 +7,7 @@
     'website': 'https://GigaClub.net/',
     'license': 'GPL-3',
     'depends': ['gigaclub_base'],
-    'data': ['views/gc_user_views.xml'],
+    'data': ['views/gc_user_views.xml', 'views/res_config_settings_views.xml'],
     'installable': True,
     'auto_install': False
 }
