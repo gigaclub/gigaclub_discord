@@ -22,7 +22,7 @@
                         <div class="o_setting_left_pane" />
                         <div class="o_setting_right_pane">
                             <label for="gc_discord_bot_token" />
-                            <field name="gc_discord_bot_token" />
+                            <field name="gc_discord_bot_token" password="True" />
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 o_setting_box">
@@ -30,6 +30,13 @@
                         <div class="o_setting_right_pane">
                             <label for="gc_discord_server_id" />
                             <field name="gc_discord_server_id" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane" />
+                        <div class="o_setting_right_pane">
+                            <label for="gc_discord_system_channel_id" />
+                            <field name="gc_discord_system_channel_id" />
                         </div>
                     </div>
                 </xpath>

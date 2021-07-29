@@ -11,3 +11,4 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.gc_discord_server_id", readonly=False
     )
     gc_discord_bot_status = fields.Selection(related="company_id.gc_discord_bot_status")
+    gc_discord_system_channel_id = fields.Many2one(related="company_id.gc_discord_system_channel_id")

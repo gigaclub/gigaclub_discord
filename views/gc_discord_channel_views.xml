@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="gc_discord_channel_tree_view">
+            <field name="name">gc.discord.channel.tree.view</field>
+            <field name="model">gc.discord.channel</field>
+            <field name="arch" type="xml">
+                <tree string="Channels">
+                    <field name="name" />
+                    <field name="discord_channel_uuid" />
+                    <field name="category_id" />
+                    <field name="type" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="gc_discord_channel_form_view">
+            <field name="name">gc.discord.channel.form.view</field>
+            <field name="model">gc.discord.channel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name" />
+                        <field name="discord_channel_uuid" />
+                        <field name="category_id" />
+                        <field name="type" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="gc_discord_channel_action">
+            <field name="name">Channel</field>
+            <field name="res_model">gc.discord.channel</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

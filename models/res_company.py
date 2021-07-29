@@ -13,3 +13,4 @@ class ResCompany(models.Model):
         ],
         default="stopped",
     )
+    gc_discord_system_channel_id = fields.Many2one(comodel_name="gc.discord.channel")

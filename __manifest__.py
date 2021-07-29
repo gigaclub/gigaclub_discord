@@ -6,8 +6,16 @@
     "author": "GigaClub.net",
     "website": "https://GigaClub.net/",
     "license": "GPL-3",
-    "depends": ["gigaclub_base"],
-    "data": ["views/gc_user_views.xml", "views/res_config_settings_views.xml"],
+    "depends": ["gigaclub_builder_system"],
+    "data": [
+        "views/gc_discord_category_views.xml",
+        "views/gc_discord_channel_views.xml",
+        "views/gc_discord_role_views.xml",
+        "views/gc_user_views.xml",
+        "views/menu_views.xml",
+        "views/res_config_settings_views.xml",
+        "security/ir.model.access.csv",
+    ],
     "installable": True,
     "auto_install": False,
 }
