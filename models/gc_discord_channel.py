@@ -6,7 +6,7 @@ class GCDiscordChannel(models.Model):
     _description = 'GigaClub Discord Channel'
 
     name = fields.Char()
-    discord_channel_uuid = fields.Char()
+    discord_channel_uuid = fields.Char(readonly=True)
     type = fields.Selection(
         selection=[
             ("text", "Text"),

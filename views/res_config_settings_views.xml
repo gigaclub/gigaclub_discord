@@ -39,6 +39,23 @@
                             <field name="gc_discord_system_channel_id" />
                         </div>
                     </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <field name="gc_discord_reload" invisible="True" />
+                        <button
+              class="btn btn-primary"
+              type="object"
+              name="reload_bot"
+              string="Reload Bot"
+              attrs="{'invisible': [('gc_discord_reload', '=', True)]}"
+            />
+                        <button
+              class="disabled btn btn-primary"
+              type="button"
+              name="reload_bot"
+              string="Reload Bot"
+              attrs="{'invisible': [('gc_discord_reload', '=', False)]}"
+            />
+                    </div>
                 </xpath>
             </field>
         </record>
