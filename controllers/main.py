@@ -78,6 +78,8 @@ class MainController(http.Controller):
                             if channel_id.category_id:
                                 category = self.get_channel(int(channel_id.category_id.discord_channel_uuid))
                                 await channel.edit(category=category)
+                            else:
+                                await channel.edit(category=None)
 
         async def refresh_categories_and_channels(self):
             with api.Environment.manage():
