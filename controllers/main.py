@@ -139,7 +139,7 @@ class MainController(http.Controller):
     @http.route(['/discordbot/start'], type="http", method=['POST'], csrf=False)
     def start_discord_bot(self):
         company_id = request.env.user.company_id or request.env["res.company"].browse(1)
-        if company_id.gc_discord_bot_token and company_id.gc_discord_bot_token and company_id.gc_discord_server_status == "stopped":
+        if company_id.gc_discord_bot_token and company_id.gc_discord_server_status and company_id.gc_discord_server_status == "stopped":
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
             self.client = self.MyBot(command_prefix="!", env=request.env)
@@ -148,12 +148,12 @@ class MainController(http.Controller):
             bot_thread.start()
         else:
             raise Exception(_("Bot is Started or Discord Bot Token or Discord Server ID not set!"))
-        return "started"
+        return "<script>window.close()</script>"
 
     @http.route(['/discordbot/stop'], type="http", method=['POST'], csrf=False)
     def stop_discord_bot(self):
         company_id = request.env.user.company_id or request.env["res.company"].browse(1)
-        if company_id.gc_discord_bot_token and company_id.gc_discord_bot_token and company_id.gc_discord_server_status == "started":
+        if company_id.gc_discord_bot_token and company_id.gc_discord_server_status and company_id.gc_discord_server_status == "started":
             try:
                 asyncio.run(self.client.logout())
                 del self.client
@@ -162,11 +162,11 @@ class MainController(http.Controller):
             company_id.gc_discord_server_status = "stopped"
         else:
             raise Exception(_("Bot is Stopped or Discord Bot Token or Discord Server ID not set!"))
-        return "stopped"
+        return "<script>window.close()</script>"
 
     @http.route(["/discordbot/reload"], type="http", method=["POST"], csrf=False)
     def reload_discord_bot(self):
         self.stop_discord_bot()
         self.start_discord_bot()
         asyncio.run(self.client.refresh_categories_and_channels())
-        return "reloaded"
+        return "<script>window.close()</script>"

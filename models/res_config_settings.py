@@ -23,16 +23,28 @@ class ResConfigSettings(models.TransientModel):
     )
 
     def start_discord_bot(self):
-        domain = self.env["ir.config_parameter"].get_param("web.base.url")
-        requests.post(f"${domain}/discordbot/start")
+        return {
+            "name": "start",
+            "res_model": "ir.actions.act_url",
+            "type": "ir.actions.act_url",
+            "target": "_blank",
+            "url": "/discordbot/start"
+        }
 
     def stop_discord_bot(self):
-        domain = self.env["ir.config_parameter"].get_param("web.base.url")
-        requests.post(f"${domain}/discordbot/stop")
+        return {
+            "name": "stop",
+            "res_model": "ir.actions.act_url",
+            "type": "ir.actions.act_url",
+            "target": "_blank",
+            "url": "/discordbot/stop"
+        }
 
-    def reload_bot(self):
-        # self.ensure_one()
-        # self.gc_discord_reload = True
-        # requests.get("http://172.30.228.136:8080/reload")
-        domain = self.env["ir.config_parameter"].get_param("web.base.url")
-        requests.post(f"{domain}/discordbot/start")
+    def reload_discord_bot(self):
+        return {
+            "name": "reload",
+            "res_model": "ir.actions.act_url",
+            "type": "ir.actions.act_url",
+            "target": "_blank",
+            "url": "/discordbot/reload"
+        }
