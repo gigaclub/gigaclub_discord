@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="gc_discord_role_tree_view">
+            <field name="name">gc.discord.role.tree.view</field>
+            <field name="model">gc.discord.role</field>
+            <field name="arch" type="xml">
+                <tree string="Roles">
+                    <field name="name" />
+                    <field name="role_id" />
+                    <field name="hoist" />
+                    <field name="position" />
+                    <field name="managed" />
+                    <field name="mentionable" />
+                    <field name="user_ids" />
+                    <field name="permission_profile_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="gc_discord_role_form_view">
+            <field name="name">gc.discord.role.form.view</field>
+            <field name="model">gc.discord.role</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name" />
+                        <field name="role_id" />
+                        <field name="hoist" />
+                        <field name="position" />
+                        <field name="managed" />
+                        <field name="mentionable" />
+                        <field name="user_ids" />
+                        <field name="permission_profile_id" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="gc_discord_role_action">
+            <field name="name">Role</field>
+            <field name="res_model">gc.discord.role</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="gc_discord_permission_profile_tree_view">
+            <field name="name">gc.discord.permission.profile.tree.view</field>
+            <field name="model">gc.discord.permission.profile</field>
+            <field name="arch" type="xml">
+                <tree string="Permission profiles">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="gc_discord_permission_profile_form_view">
+            <field name="name">gc.discord.permission.profile.form.view</field>
+            <field name="model">gc.discord.permission.profile</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name" />
+                        <field name="administrator" />
+                        <field name="create_instant_invite" />
+                        <field name="kick_members" />
+                        <field name="ban_members" />
+                        <field name="manage_channels" />
+                        <field name="manage_guild" />
+                        <field name="add_reactions" />
+                        <field name="view_audit_log" />
+                        <field name="priority_speaker" />
+                        <field name="stream" />
+                        <field name="read_messages" />
+                        <field name="send_messages" />
+                        <field name="send_tts_messages" />
+                        <field name="manage_messages" />
+                        <field name="embed_links" />
+                        <field name="attach_files" />
+                        <field name="read_message_history" />
+                        <field name="mention_everyone" />
+                        <field name="external_emojis" />
+                        <field name="view_guild_insights" />
+                        <field name="connect" />
+                        <field name="speak" />
+                        <field name="mute_members" />
+                        <field name="deafen_members" />
+                        <field name="move_members" />
+                        <field name="use_voice_activation" />
+                        <field name="change_nickname" />
+                        <field name="manage_nicknames" />
+                        <field name="manage_roles" />
+                        <field name="manage_webhooks" />
+                        <field name="manage_emojis" />
+                        <field name="use_slash_commands" />
+                        <field name="request_to_speak" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="gc_discord_permission_profile_action">
+            <field name="name">Permission profile</field>
+            <field name="res_model">gc.discord.permission.profile</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+{
+    "name": "GigaClub Discord",
+    "version": "14.0.1.0.0",
+    "summary": "GigaClub Discord Bot Module",
+    "category": "GigaClub",
+    "author": "GigaClub.net",
+    "website": "https://GigaClub.net/",
+    "license": "GPL-3",
+    "depends": ["gigaclub_builder_system"],
+    "data": [
+        "views/gc_discord_category_views.xml",
+        "views/gc_discord_channel_views.xml",
+        "views/gc_discord_permission_profile_views.xml",
+        "views/gc_discord_role_views.xml",
+        "views/gc_user_views.xml",
+        "views/menu_views.xml",
+        "views/res_config_settings_views.xml",
+        "security/ir.model.access.csv",
+    ],
+    "installable": True,
+    "auto_install": False,
+}
