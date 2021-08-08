@@ -6,6 +6,7 @@
         <menuitem id="gc_menu_discord_category" parent="gc_discord_menu_root" action="gigaclub_discord.gc_discord_category_action" name="Category" />
         <menuitem id="gc_menu_discord_channel" parent="gc_discord_menu_root" action="gigaclub_discord.gc_discord_channel_action" name="Channel" />
         <menuitem id="gc_menu_discord_role" parent="gc_discord_menu_root" action="gigaclub_discord.gc_discord_role_action" name="Role" />
+        <menuitem id="gc_menu_discord_permission_profile" parent="gc_discord_menu_root" action="gigaclub_discord.gc_discord_permission_profile_action" name="Permission profile" />
 
     </data>
 </odoo>

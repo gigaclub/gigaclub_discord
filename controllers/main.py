@@ -126,7 +126,6 @@ class MainController(http.Controller):
             if message.content.startswith('$hello'):
                 await message.channel.send('Hello!')
 
-        @commands.is_owner()
         async def shutdown(self):
             await self.logout()
 

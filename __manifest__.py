@@ -10,6 +10,7 @@
     "data": [
         "views/gc_discord_category_views.xml",
         "views/gc_discord_channel_views.xml",
+        "views/gc_discord_permission_profile_views.xml",
         "views/gc_discord_role_views.xml",
         "views/gc_user_views.xml",
         "views/menu_views.xml",

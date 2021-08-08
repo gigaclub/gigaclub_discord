@@ -10,6 +10,7 @@
                     <field name="name" />
                     <field name="discord_channel_uuid" />
                     <field name="channel_ids" />
+                    <field name="permission_profile_id" />
                 </tree>
             </field>
         </record>
@@ -23,6 +24,7 @@
                         <field name="name" />
                         <field name="discord_channel_uuid" />
                         <field name="channel_ids" />
+                        <field name="permission_profile_id" />
                     </group>
                 </form>
             </field>
