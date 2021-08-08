@@ -30,6 +30,110 @@ class MainController(http.Controller):
                                 await self.register_category(channel)
                             else:
                                 await self.register_channel(channel)
+                        for role in guild.roles:
+                            await self.register_role(role)
+
+        async def register_role(self, role):
+            with api.Environment.manage():
+                with registry(self.env.cr.dbname).cursor() as new_cr:
+                    new_env = api.Environment(new_cr, self.env.uid, self.env.context)
+                    if not new_env["gc.discord.role"].search_count([("role_id", "=", str(role.id))]):
+                        role_id = new_env["gc.discord.role"].create({
+                            "name": role.name,
+                            "role_id": str(role.id),
+                            "hoist": role.hoist,
+                            "position": role.position,
+                            "managed": role.managed,
+                            "mentionable": role.mentionable
+                        })
+                        member_ids = []
+                        for member in role.members:
+                            user_id = new_env["gc.user"].search([("discord_uuid", "=", str(member.id))], limit=1)
+                            if user_id:
+                                member_ids.append(user_id.id)
+                        role_id.user_ids = [[6, 0, member_ids]]
+                        permission_profile_id = role_id.permission_profile_id.create({
+                            "name": role.name,
+                            "administrator": role.permissions.administrator,
+                            "create_instant_invite": role.permissions.create_instant_invite,
+                            "kick_members": role.permissions.kick_members,
+                            "ban_members": role.permissions.ban_members,
+                            "manage_channels": role.permissions.manage_channels,
+                            "manage_guild": role.permissions.manage_guild,
+                            "add_reactions": role.permissions.add_reactions,
+                            "view_audit_log": role.permissions.view_audit_log,
+                            "priority_speaker": role.permissions.priority_speaker,
+                            "stream": role.permissions.stream,
+                            "read_messages": role.permissions.read_messages,
+                            "send_messages": role.permissions.send_messages,
+                            "send_tts_messages": role.permissions.send_tts_messages,
+                            "manage_messages": role.permissions.manage_messages,
+                            "embed_links": role.permissions.embed_links,
+                            "attach_files": role.permissions.attach_files,
+                            "read_message_history": role.permissions.read_message_history,
+                            "mention_everyone": role.permissions.mention_everyone,
+                            "external_emojis": role.permissions.external_emojis,
+                            "view_guild_insights": role.permissions.view_guild_insights,
+                            "connect": role.permissions.connect,
+                            "speak": role.permissions.speak,
+                            "mute_members": role.permissions.mute_members,
+                            "deafen_members": role.permissions.deafen_members,
+                            "move_members": role.permissions.move_members,
+                            "use_voice_activation": role.permissions.use_voice_activation,
+                            "change_nickname": role.permissions.change_nickname,
+                            "manage_nicknames": role.permissions.manage_nicknames,
+                            "manage_roles": role.permissions.manage_roles,
+                            "manage_webhooks": role.permissions.manage_webhooks,
+                            "manage_emojis": role.permissions.manage_emojis,
+                            "use_slash_commands": role.permissions.use_slash_commands,
+                            "request_to_speak": role.permissions.request_to_speak
+                        })
+                        role_id.permission_profile_id = permission_profile_id
+                    else:
+                        role_id = new_env["gc.discord.role"].search([("role_id", "=", str(role.id))], limit=1)
+                        permissions = discord.Permissions(
+                            administrator=role_id.permission_profile_id.administrator,
+                            create_instant_invite=role_id.permission_profile_id.create_instant_invite,
+                            kick_members=role_id.permission_profile_id.kick_members,
+                            ban_members=role_id.permission_profile_id.ban_members,
+                            manage_channels=role_id.permission_profile_id.manage_channels,
+                            manage_guild=role_id.permission_profile_id.manage_guild,
+                            add_reactions=role_id.permission_profile_id.add_reactions,
+                            view_audit_log=role_id.permission_profile_id.view_audit_log,
+                            priority_speaker=role_id.permission_profile_id.priority_speaker,
+                            stream=role_id.permission_profile_id.stream,
+                            read_messages=role_id.permission_profile_id.read_messages,
+                            send_messages=role_id.permission_profile_id.send_messages,
+                            send_tts_messages=role_id.permission_profile_id.send_tts_messages,
+                            manage_messages=role_id.permission_profile_id.manage_messages,
+                            embed_links=role_id.permission_profile_id.embed_links,
+                            attach_files=role_id.permission_profile_id.attach_files,
+                            read_message_history=role_id.permission_profile_id.read_message_history,
+                            mention_everyone=role_id.permission_profile_id.mention_everyone,
+                            external_emojis=role_id.permission_profile_id.external_emojis,
+                            view_guild_insights=role_id.permission_profile_id.view_guild_insights,
+                            connect=role_id.permission_profile_id.connect,
+                            speak=role_id.permission_profile_id.speak,
+                            mute_members=role_id.permission_profile_id.mute_members,
+                            deafen_members=role_id.permission_profile_id.deafen_members,
+                            move_members=role_id.permission_profile_id.move_members,
+                            use_voice_activation=role_id.permission_profile_id.use_voice_activation,
+                            change_nickname=role_id.permission_profile_id.change_nickname,
+                            manage_nicknames=role_id.permission_profile_id.manage_nicknames,
+                            manage_roles=role_id.permission_profile_id.manage_roles,
+                            manage_webhooks=role_id.permission_profile_id.manage_webhooks,
+                            manage_emojis=role_id.permission_profile_id.manage_emojis,
+                            use_slash_commands=role_id.permission_profile_id.use_slash_commands,
+                            request_to_speak=role_id.permission_profile_id.request_to_speak
+                        )
+                        await role.edit(
+                            name=role_id.name,
+                            hoist=role_id.hoist,
+                            mentionable=role_id.mentionable,
+                            position=role_id.position,
+                            permissions=permissions
+                        )
+
 
         async def register_category(self, channel):
             with api.Environment.manage():
@@ -89,6 +193,8 @@ class MainController(http.Controller):
                     if company_id.gc_discord_reload:
                         for guild in self.guilds:
                             if guild.id == int(company_id.gc_discord_server_id):
+                                for role in guild.roles:
+                                    await self.register_role(role)
                                 for channel in guild.channels:
                                     if isinstance(channel, discord.channel.CategoryChannel):
                                         await self.register_category(channel)

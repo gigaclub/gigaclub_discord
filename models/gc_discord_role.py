@@ -6,7 +6,7 @@ class GCDiscordRole(models.Model):
     _description = 'GigaClub Discord Role'
 
     name = fields.Char()
-    role_id = fields.Integer()
+    role_id = fields.Char()
     hoist = fields.Boolean()
     position = fields.Integer()
     managed = fields.Boolean()
